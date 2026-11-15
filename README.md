@@ -44,3 +44,7 @@ O projeto contém configuração para Sites/Cloudflare. Enviar código ao GitHub
 ## Validação desta alteração
 
 TypeScript e compilação de produção. A experiência ainda deve ser conferida em aparelhos reais, especialmente com teclado aberto e diferentes tamanhos de tela.
+
+## Hospedagem no Render
+
+Veja [RENDER.md](RENDER.md). O repositório inclui `render.yaml`, `build:render` e `start:render`; mantenha o banco e a autenticação no Supabase existente.
