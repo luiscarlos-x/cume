@@ -31,3 +31,33 @@
 }
 @media(max-width:360px){.metrics{grid-template-columns:1fr}.metric{min-height:115px}.category-summary{flex-direction:column;align-items:stretch}.donut{align-self:center}.goal-summary h2{font-size:22px}.mobile-bottom-nav button{font-size:9px}.topbar>small{display:none}}
 @media(prefers-reduced-motion:reduce){.sidebar{transition:none}}
+
+/* Appearance: a saved preference shared by login and the application. */
+:root{color-scheme:light}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;font-size:12px;white-space:nowrap}
+.theme-toggle:hover{background:var(--line)}
+.topbar-actions{gap:16px;flex-shrink:0}.topbar-actions small{display:flex;align-items:center;gap:8px;font-size:10px}.auth-theme{display:flex;justify-content:flex-end;margin-bottom:20px}
+html[data-theme=dark]{color-scheme:dark;--bg:#101b18;--ink:#e2ece6;--muted:#adbcaf;--line:#34473c;--green:#315f49;--surface:#192820;--soft:#23372b}
+html[data-theme=dark] :is(.sidebar,.panel,.metric:not(.balance-card),.modal,.modal-actions,.mountain-feature,.mobile-bottom-nav,.secondary,input,select,.month-filter){background:var(--surface);border-color:var(--line)}
+html[data-theme=dark] .topbar{background:#14221bf5}
+html[data-theme=dark] :is(p,small,.eyebrow,.nav-label,.metric-label,.panel-foot,.bottom-note,.empty,.empty-inline,.goal-pending,.mini-metric>span,.calculation-grid dt,.calendar-grid>b,.status,.icon-button,.account-details>span,.transaction-title small,.budget-title small,.share-row small,.reconciliation-row small,.secure,.form-note){color:var(--muted)}
+html[data-theme=dark] :is(.logo,.topbar b,.segmented .selected,.calculation-grid dd,.account-details b,.permission-key b,.modal label,.auth label,.intelligence form label,.goal-toolbar label,.goal-form label,.goal-summary label,.mountain-caption){color:var(--ink)}
+html[data-theme=dark] :is(nav button,.mobile-bottom-nav button){color:#bdcfbf}
+html[data-theme=dark] :is(.workspace,.segmented,.avatar,.tiny-avatar,.chip,.transaction-icon,.metric-icon,.account-icon,.permission-key,.invite-result,.split-preview,.decision-note,.calculation-grid>div:last-child,th,.calendar-grid>button,.mountain-caption){background:var(--soft);border-color:var(--line)}
+html[data-theme=dark] :is(.workspace>span,.sidebar .mountain-nav button>svg,nav .active,.mobile-bottom-nav button[aria-current=page],.segmented .selected,.calendar-grid>button.chosen){background:#34523d;color:#e2efdb}
+html[data-theme=dark] :is(nav button:hover,.secondary:hover,.icon-button:hover,tbody tr:hover){background:#2c4032}
+html[data-theme=dark] :is(.panel-foot,th,td,.account-line,.settings-row,.audit-row,.share-row,.calculation-grid>div,.sidebar .mountain-nav button){border-color:var(--line)}
+html[data-theme=dark] :is(.bar,.budget-track){background:#3a4c3d}
+html[data-theme=dark] :is(.journey-card,.info-banner,.privacy-hero,.auth-art,.safe-summary,.success-note){background:#233a2c;border-color:#405b44}
+html[data-theme=dark] :is(.green,.success-note,.account-manage,.demo-link,.audit-row,.journey-card p){color:#aad19b}
+html[data-theme=dark] :is(.demo-bar,.calendar-dot){background:#393523;color:#e1d5ab;border-color:#5e5537}
+html[data-theme=dark] :is(.error,.safe-summary.deficit){background:#3d2822;border-color:#754b3c;color:#f4b29a}
+html[data-theme=dark] :is(.danger,.safe-summary.deficit h2,.status.cancelled){color:#f0ac96}
+html[data-theme=dark] .status.planned{color:#dfc788}
+html[data-theme=dark] .primary,html[data-theme=dark] .mobile-bottom-nav .mobile-add{background:var(--green);color:#fff}
+html[data-theme=dark] .recharts-default-tooltip{background:var(--surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+html[data-theme=dark] .recharts-cartesian-axis-tick-value{fill:var(--muted)}
+html[data-theme=dark] .recharts-cartesian-grid line{stroke:var(--line)}
+html[data-theme=dark] .mountain-scene{background:#233a2c}
+html[data-theme=dark] input::placeholder{color:#a4b4a7}
+@media(max-width:700px){.topbar-actions small{display:none}.topbar-actions{gap:0}.topbar .theme-toggle{width:44px;padding:8px}.topbar .theme-toggle span{display:none}.topbar>div:first-child{flex:1}.topbar{gap:8px}}
