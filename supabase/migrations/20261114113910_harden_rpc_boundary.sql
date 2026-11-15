@@ -1,0 +1,16 @@
+begin;
+alter function public.create_household(text) set schema private;
+alter function public.create_invite(uuid,text) set schema private;
+alter function public.accept_invite(text) set schema private;
+alter function public.revoke_invite(uuid) set schema private;
+alter function public.remove_member(uuid,uuid) set schema private;
+alter function public.shared_summary(uuid,uuid,date,date) set schema private;
+create function public.create_household(house_name text) returns uuid language sql security invoker set search_path='' as $$select private.create_household(house_name)$$;
+create function public.create_invite(house_id uuid,invite_email text) returns text language sql security invoker set search_path='' as $$select private.create_invite(house_id,invite_email)$$;
+create function public.accept_invite(invite_token text) returns uuid language sql security invoker set search_path='' as $$select private.accept_invite(invite_token)$$;
+create function public.revoke_invite(invite_id uuid) returns void language sql security invoker set search_path='' as $$select private.revoke_invite(invite_id)$$;
+create function public.remove_member(house_id uuid,member_id uuid) returns void language sql security invoker set search_path='' as $$select private.remove_member(house_id,member_id)$$;
+create function public.shared_summary(person_id uuid,house_id uuid,date_from date,date_to date) returns table(income_cents bigint,expense_cents bigint) language sql security invoker set search_path='' as $$select * from private.shared_summary(person_id,house_id,date_from,date_to)$$;
+revoke all on function public.create_household(text),public.create_invite(uuid,text),public.accept_invite(text),public.revoke_invite(uuid),public.remove_member(uuid,uuid),public.shared_summary(uuid,uuid,date,date) from public,anon;
+grant execute on function public.create_household(text),public.create_invite(uuid,text),public.accept_invite(text),public.revoke_invite(uuid),public.remove_member(uuid,uuid),public.shared_summary(uuid,uuid,date,date) to authenticated;
+commit;
