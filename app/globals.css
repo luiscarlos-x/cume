@@ -61,3 +61,16 @@ html[data-theme=dark] .recharts-cartesian-grid line{stroke:var(--line)}
 html[data-theme=dark] .mountain-scene{background:#233a2c}
 html[data-theme=dark] input::placeholder{color:#a4b4a7}
 @media(max-width:700px){.topbar-actions small{display:none}.topbar-actions{gap:0}.topbar .theme-toggle{width:44px;padding:8px}.topbar .theme-toggle span{display:none}.topbar>div:first-child{flex:1}.topbar{gap:8px}}
+
+/* Account access: compact controls for desktop and mobile, including dark mode. */
+.auth-panel .remember-login{display:flex;align-items:center;gap:10px;cursor:pointer;margin:8px 0 22px;font-size:13px;line-height:1.5}
+.auth-panel .remember-login input{width:20px;height:20px;min-height:20px;flex:0 0 20px;margin:0;padding:0;accent-color:var(--green)}
+.account-security{max-width:560px;padding:26px}
+.account-security-heading{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.account-security-heading p{overflow-wrap:anywhere;font-size:13px;margin-top:5px}
+.account-security form{display:grid;gap:18px}
+.account-security label{display:grid;gap:8px;font-size:13px}
+.account-security input{width:100%;min-width:0}
+.account-security .form-note{margin:0}
+.account-security .primary{justify-self:start}
+@media(max-width:600px){.account-security{padding:20px}.account-security .primary{width:100%;justify-content:center}}
