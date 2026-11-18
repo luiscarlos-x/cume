@@ -74,3 +74,13 @@ html[data-theme=dark] input::placeholder{color:#a4b4a7}
 .account-security .form-note{margin:0}
 .account-security .primary{justify-self:start}
 @media(max-width:600px){.account-security{padding:20px}.account-security .primary{width:100%;justify-content:center}}
+
+/* Explicit destructive actions with mobile touch targets. */
+.record-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.record-actions .icon-button,.settings-row>.icon-button.danger{min-width:40px;min-height:40px;flex-shrink:0}
+.delete-confirmation>p{margin:0 0 16px;overflow-wrap:anywhere}
+.danger-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#a83e32;color:#fff;border-radius:8px;padding:13px 20px;min-height:44px;font-weight:600}
+.danger-button:hover:not(:disabled){background:#8d3026}
+.delete-from-editor{margin-right:auto;display:inline-flex;align-items:center;gap:7px;min-height:44px}
+html[data-theme=dark] .danger-button{background:#b94a3d;color:#fff}
+@media(max-width:600px){.record-actions .icon-button,.settings-row>.icon-button.danger{min-width:44px;min-height:44px}.modal-actions:has(.delete-from-editor){flex-wrap:wrap}.modal-actions .delete-from-editor{flex-basis:100%;justify-content:flex-start}}
