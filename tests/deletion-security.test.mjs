@@ -66,6 +66,15 @@ test('Deletion permissions, balances, references and audit trail',async t=>{
    assert.equal((await q('delete from public.categories where id=$1 returning id',[ownCategory])).length,0);
    assert.equal((await q('delete from public.transactions where id=$1 returning id',[ownTx])).length,0);
   });
+  await t.test('accounts can be edited and only empty owned accounts deleted',async()=>{
+   await as(A);
+   const id=(await q("insert into public.accounts(name,type,opening_on) values('Empty','bank','2020-01-01') returning id"))[0].id;
+   await q("update public.accounts set name='Renamed',type='wallet' where id=$1",[id]);
+   assert.equal((await q('select name from public.accounts where id=$1',[id]))[0].name,'Renamed');
+   await as(B);assert.equal((await q('delete from public.accounts where id=$1 returning id',[id])).length,0);
+   await as(A);assert.equal((await q('delete from public.accounts where id=$1 returning id',[id])).length,1);
+   await assert.rejects(q('delete from public.accounts where id=$1',[account]),e=>e.code==='23503');
+  });
   await t.test('anonymous deletion is denied',async()=>{
    await as(null);
    for(const table of ['transactions','categories'])await assert.rejects(q('delete from public.'+table),/permission denied/);

@@ -1,6 +1,6 @@
 import type {Data, Row} from './finance';
 
-export type DeletableTable = 'transactions' | 'categories';
+export type DeletableTable = 'transactions' | 'categories' | 'accounts';
 
 export function canDeleteRecord(table: DeletableTable, record: Row, uid: string, data: Data) {
   const author = table === 'transactions' ? record.user_id : record.owner_user_id;
@@ -8,7 +8,9 @@ export function canDeleteRecord(table: DeletableTable, record: Row, uid: string,
 }
 
 export function deletionBlock(table: DeletableTable, record: Row, data: Data): string {
-  if (table === 'categories') {
+  if (table === 'accounts') {
+    if ([...data.transactions,...data.settlement_entries,...data.reconciliations,...data.account_adjustments].some(item => item.account_id === record.id)) return 'Esta conta possui movimentações ou conferências e não pode ser apagada. Você pode editar seu nome e tipo.';
+  } else if (table === 'categories') {
     if (data.transactions.some(item => item.category_id === record.id)) return 'Esta categoria está em uso. Altere a categoria dos lançamentos vinculados antes de apagá-la.';
     if (data.budgets.some(item => item.category_id === record.id)) return 'Esta categoria tem um orçamento. Remova o orçamento em Planejamento antes de apagá-la.';
   } else {
@@ -19,6 +21,7 @@ export function deletionBlock(table: DeletableTable, record: Row, data: Data): s
 }
 
 export function deletionError(table: DeletableTable, error: {code?: string; message: string}) {
+  if (error.code === '23503' && table === 'accounts') return 'Esta conta possui registros vinculados e não pode ser apagada.';
   if (error.code === '23503') return table === 'categories'
     ? 'Esta categoria está vinculada a lançamentos ou orçamentos. Altere esses vínculos antes de apagá-la.'
     : 'Este lançamento está vinculado a um rateio ou acerto. Revise os vínculos em Rateios e acertos.';

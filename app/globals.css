@@ -84,3 +84,5 @@ html[data-theme=dark] input::placeholder{color:#a4b4a7}
 .delete-from-editor{margin-right:auto;display:inline-flex;align-items:center;gap:7px;min-height:44px}
 html[data-theme=dark] .danger-button{background:#b94a3d;color:#fff}
 @media(max-width:600px){.record-actions .icon-button,.settings-row>.icon-button.danger{min-width:44px;min-height:44px}.modal-actions:has(.delete-from-editor){flex-wrap:wrap}.modal-actions .delete-from-editor{flex-basis:100%;justify-content:flex-start}}
+
+.category-period{padding:0 22px 20px}.category-period label{display:grid;gap:8px;font-weight:600}.category-period input{width:100%;min-width:0}.period-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.category-panel .panel-head{flex-wrap:wrap}.category-period .secondary,.category-period .primary{min-height:44px}@media(max-width:600px){.category-period .form-grid{grid-template-columns:1fr}.category-period{padding:0 16px 18px}}
