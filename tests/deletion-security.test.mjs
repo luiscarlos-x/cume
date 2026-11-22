@@ -28,6 +28,15 @@ test('Deletion permissions, balances, references and audit trail',async t=>{
   const bAccount=(await q("insert into public.accounts(name,type,opening_on) values('Banco B','bank','2020-01-01') returning id"))[0].id;
   await as(A);await q("insert into public.data_permissions values($1,$2,$3,'details',now())",[A,B,house]);
 
+  await t.test('hide accounts and rename used categories without changing financial data',async()=>{
+   await as(A);await q('update public.accounts set is_hidden=true where id=$1',[account]);
+   assert.equal((await q('select is_hidden from public.accounts where id=$1',[account]))[0].is_hidden,true);
+   await q("update public.categories set name='Renamed' where id=$1",[category]);
+   assert.equal((await q('select category_id from public.transactions where id=$1',[tx]))[0].category_id,category);
+   await as(B);assert.equal((await q('update public.accounts set is_hidden=false where id=$1 returning id',[account])).length,0);
+   assert.equal((await q("update public.categories set name='Other' where id=$1 returning id",[category])).length,0);
+   await as(A);await q('update public.accounts set is_hidden=false where id=$1',[account]);
+  });
   await t.test('shared visibility never grants deletion',async()=>{
    await as(B);
    for(const [table,id] of [['transactions',tx],['transactions',sharedTx],['categories',category],['categories',sharedCategory]]){
